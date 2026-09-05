@@ -24,12 +24,15 @@ def inicializar_banco():
     print('Banco de dados criado e inicializado com sucesso!')
 
 
-def salvar_dados(df: pd.Dataframe, nome_tabela: str):
+def salvar_dados(df: pd.DataFrame, nome_tabela: str):
     
     conexao = sqlite3.connect(DBPATH)
 
-    df.to_sql(nome_tabela, if_exists='append', index=True)
+    # Garante que o indice do DataFrame no Pandas seja chamado 'data' para coincidir com a chave primaria no SQL
+    df.index.name = 'data'
+
+    df.to_sql(nome_tabela, conexao, if_exists='append', index=True)
 
     conexao.close()
 
-    print(f'Dados salvos na tabelas: {nome_tabela} com sucesso!')
+    print(f'Dados salvos na tabela {nome_tabela} com sucesso!')
