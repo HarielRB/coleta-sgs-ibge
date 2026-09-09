@@ -31,7 +31,7 @@ def salvar_dados(df: pd.DataFrame, nome_tabela: str):
     # Garante que o indice do DataFrame no Pandas seja chamado 'data' para coincidir com a chave primaria no SQL
     df.index.name = 'data'
 
-    df.to_sql(nome_tabela, conexao, if_exists='append', index=True)
+    df.to_sql(nome_tabela, conexao, if_exists='replace', index=True)
 
     conexao.close()
 

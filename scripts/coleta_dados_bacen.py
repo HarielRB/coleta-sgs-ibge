@@ -30,10 +30,10 @@ def coletar_ipca_ibge():
     ipca_indice = sidrapy.get_table(table_code = '1737', 
                                 territorial_level = '1',
                                 ibge_territorial_code = 'all',
-                                variable = '2266',
+                                variable = '63',
                                 period='all')
 
-    ipca_indice_clean = ipca_indice.iloc[1:][['D3C', 'V']].copy()
+    ipca_indice_clean = ipca_indice.iloc[1:][['D2C', 'V']].copy()
     ipca_indice_clean.columns = ['data', 'variacao_mensal']
     ipca_indice_clean['variacao_mensal'] = pd.to_numeric(
         ipca_indice_clean['variacao_mensal'],
